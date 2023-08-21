@@ -12,10 +12,10 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Checkbox from "@mui/material/Checkbox";
 import IconButton from "@mui/material/IconButton";
-
+import Delete from "@mui/icons-material/Delete";
 import "./style.css";
 import { useSelector, useDispatch } from "react-redux";
-import { getTodos } from "../../store/actions/actions/todo";
+import { deleteTodos, getTodos } from "../../store/actions/actions/todo";
 export default function TodoList() {
   const [value, setValue] = React.useState("1");
   const todos = useSelector((state: any) => state.todo);
@@ -28,8 +28,9 @@ export default function TodoList() {
     setValue(newValue);
   };
 
-  const handleToggle = (id: any, value: any) => () => {
-    
+  const handleToggle = (id: any, value: any) => () => {};
+  const handelDelete = (id: any, value: any) => () => {
+    dispatch(deleteTodos(id as any) as any);
   };
 
   return (
@@ -53,7 +54,9 @@ export default function TodoList() {
                   <ListItem
                     key={index}
                     secondaryAction={
-                      <IconButton edge="end" aria-label="comments"></IconButton>
+                      <IconButton edge="end" aria-label="comments">
+                        <Delete onClick={handelDelete(item._id, index)} />
+                      </IconButton>
                     }
                     disablePadding
                   >

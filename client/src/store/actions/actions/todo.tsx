@@ -36,11 +36,26 @@ export const updateTodos = (id: number) => (dispatch: any) => {
 
 export const addTodos = (data: any) => (dispatch: any) => {
   axiosInstance
-    .post(`/todos/add/`, data)
+    .post(`/todos/create/`, data)
     .then(function (response) {
       // success
       dispatch({
         type: TYPES.ADD_TODO,
+        payload: response.data,
+      });
+    })
+    .catch(function (error) {
+      // show snackbar
+      console.log(error);
+    });
+};
+export const deleteTodos = (id: any) => (dispatch: any) => {
+  axiosInstance
+    .delete(`/todos/delete/${id}`)
+    .then(function (response) {
+      // success
+      dispatch({
+        type: TYPES.DELETE_TODO,
         payload: response.data,
       });
     })

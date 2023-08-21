@@ -4,6 +4,8 @@ import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { FormControl } from "@mui/base/FormControl";
 import { makeStyles } from "@material-ui/core";
+import { useDispatch } from "react-redux";
+import { addTodos } from "../../store/actions/actions/todo";
 const useStyles = makeStyles({
   customIconButton: {
     minWidth: "30px",
@@ -14,14 +16,16 @@ const useStyles = makeStyles({
 export default function Todoform() {
   const [onboardingData, setOnboardingData] = useState({});
   const classes = useStyles();
+  const dispatch = useDispatch();
   const onInputChange = (event: any) => {
     setOnboardingData({
       title: event.target.value,
-      status: "active",
+      status: true,
     });
     console.log(event.target.value, onboardingData);
   };
   const handelSubmit = () => {
+    dispatch(addTodos(onboardingData as any) as any);
     console.log(onboardingData);
   };
   return (

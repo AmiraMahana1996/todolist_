@@ -2,12 +2,13 @@ import dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 
-import mongoose from 'mongoose';
+import mongoose, { ConnectOptions } from 'mongoose';
 
 import logger from './helpers/logger';
 import bodyParser from 'body-parser';
 dotenv.config();
-const url: string = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.04ix10n.mongodb.net/`;
+// `mongodb+srv://todoamira:${process.env.MONGO_PASSWORD}@cluster0.1upcslh.mongodb.net/`;
+const url: string = `mongodb+srv://todoamira:${process.env.MONGO_PASSWORD}@cluster0.1upcslh.mongodb.net/`;
 
 class App {
   app: express.Application;

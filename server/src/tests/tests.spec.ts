@@ -1,7 +1,7 @@
 import supertest from 'supertest';
 import App from '../app';
 
-import ProdutService from '../services/product';
+import ProdutService from '../services/todo';
 
 // const app = new App([
 //   new productHandler(),

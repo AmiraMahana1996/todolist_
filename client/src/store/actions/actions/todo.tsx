@@ -1,13 +1,16 @@
+import { Action } from "redux";
 import { axiosInstance } from "../../../axiosInstance";
 import * as TYPES from "../../types/todo";
+import { ThunkDispatch } from "redux-thunk";
 export const getTodos = () => (dispatch: any) => {
   axiosInstance
-    .get("/todos")
+    .get("/todos/all")
     .then(function (response) {
+      console.log(response, "response");
       // success
       dispatch({
         type: TYPES.GET_TODOS,
-        payload: response.data,
+        payload: response.data.data,
       });
     })
     .catch(function (error) {

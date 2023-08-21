@@ -87,26 +87,6 @@ class Handler {
     }
   }
 
-  // static async getProductsByCategory(
-  //   req: express.Request,
-  //   res: express.Response
-  // ): Promise<void> {
-  //   try {
-  //     console.log(`${req.body}`);
-  //     const products = await ProdutService.getProductsByCategory(
-  //       req.params.id as string
-  //     );
-  //     res.status(200).json({
-  //       status: 200,
-  //       message: 'success',
-  //       data: products,
-  //     });
-  //   } catch (err) {
-  //     const error = err as Error;
-  //     console.log(`delete error: ${error}`);
-  //   }
-  // }
-
   initializeRoutes() {
     this.router.get(`${this.path}/all`, Handler.index);
     this.router.post(`${this.path}/create`, Handler.create);

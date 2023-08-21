@@ -2,9 +2,10 @@ import React from "react";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import "./style.css";
+import { useSelector } from "react-redux";
 export default function TodoList() {
   const [value, setValue] = React.useState(2);
-
+  const todos = useSelector((state: any) => state.todos);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };

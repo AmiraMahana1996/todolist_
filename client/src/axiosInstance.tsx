@@ -1,10 +1,7 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: "https://fakestoreapi.com/",
-  headers: {
-    "Accept-language": "Ar",
-  },
+  baseURL: "http://localhost:9000/",
 });
 
 // Add a request interceptor

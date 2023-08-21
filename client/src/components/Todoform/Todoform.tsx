@@ -8,6 +8,7 @@ const useStyles = makeStyles({
   customIconButton: {
     minWidth: "30px",
     padding: "15px",
+    height: "55px",
   },
 });
 export default function Todoform() {

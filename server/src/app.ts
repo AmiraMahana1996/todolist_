@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 import logger from './helpers/logger';
 import bodyParser from 'body-parser';
 dotenv.config();
-const url: string = `mongodb+srv://amiramahana13:${process.env.MONGO_PASSWORD}@cluster0.04ix10n.mongodb.net/`;
+const url: string = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.04ix10n.mongodb.net/`;
 
 class App {
   app: express.Application;

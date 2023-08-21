@@ -44,6 +44,7 @@ export default function Todoform() {
         </Grid>
         <Grid item xs={4} sm={4} md={4}>
           <Button
+            fullWidth
             type="submit"
             variant="contained"
             size="large"

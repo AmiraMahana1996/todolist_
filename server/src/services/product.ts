@@ -4,8 +4,9 @@ import Todo from '../models/todo';
 class ProductService {
   static async index(): Promise<ITodo[]> {
     try {
-      const products: ITodo[] = await Todo.find();
-      return products;
+      const todos: ITodo[] = await Todo.find();
+      console.log(todos);
+      return todos;
     } catch (e) {
       throw new Error(`Cann't get product information: ${e}`);
     }
@@ -24,11 +25,11 @@ class ProductService {
   // }
   static async create(data: ITodo): Promise<ITodo> {
     try {
-      const body = data as Pick<ITodo, 'name' | 'description' | 'status'>;
+      const body = data as Pick<ITodo, 'title' | 'status'>;
 
       const todo: ITodo = new Todo({
-        name: body.name,
-        description: body.description,
+        title: body.title,
+
         status: body.status,
       });
 

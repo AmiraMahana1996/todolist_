@@ -33,7 +33,7 @@ class Handler {
     res: express.Response
   ): Promise<void> {
     try {
-      console.log(`${req.body}`);
+      console.log(`ddd ${req.body}`);
       const product = await ProdutService.create(req.body as ITodo);
       res.status(200).json({
         status: 200,

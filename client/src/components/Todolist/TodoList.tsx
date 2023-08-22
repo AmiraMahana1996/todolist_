@@ -21,10 +21,18 @@ import {
   getTodos,
   updateTodos,
 } from "../../store/actions/actions/todo";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+const useStyles = makeStyles({
+  tabpanel: {
+    marginLeft: "auto",
+    marginRight: "auto",
+    justifyContent: "center",
+  },
+});
 export default function TodoList() {
   const [value, setValue] = React.useState("1");
   const todos = useSelector((state: any) => state.todo);
-
+  const classes = useStyles();
   const [checked, setChecked] = React.useState([0]);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -45,13 +53,25 @@ export default function TodoList() {
     // console.log(item);
     dispatch(updateTodos(item._id as any, item) as any);
   };
-  console.log(todos);
+
   return (
     <div className="list-con">
-      <Box sx={{ width: "100%", typography: "body1" }}>
+      <Box
+        sx={{ width: "100%", typography: "body1", justifyContent: "center" }}
+      >
         <TabContext value={value}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
+          <Box
+            sx={{
+              borderBottom: 1,
+              borderColor: "divider",
+              justifyContent: "center",
+            }}
+          >
+            <TabList
+              onChange={handleChange}
+              aria-label="lab API tabs example"
+              centered
+            >
               <Tab label="Active" value="1" />
               <Tab label="Completed" value="2" />
               <Tab label="All" value="3" />
@@ -59,7 +79,11 @@ export default function TodoList() {
           </Box>
           <TabPanel value="1">
             <List
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+              sx={{
+                width: "100%",
+                maxWidth: 360,
+                bgcolor: "background.paper",
+              }}
             >
               {todos.activeTodos ? (
                 todos?.activeTodos.map((item: any, index: any) => {
@@ -108,112 +132,100 @@ export default function TodoList() {
             <List
               sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
             >
-              <List
-                sx={{
-                  width: "100%",
-                  maxWidth: 360,
-                  bgcolor: "background.paper",
-                }}
-              >
-                {todos.completedTodos ? (
-                  todos.completedTodos.map((item: any, index: any) => {
-                    console.log(todos.length);
-                    const labelId = `checkbox-list-label-${index}`;
-                    return (
-                      <>
-                        <ListItem
-                          key={index}
-                          secondaryAction={
-                            <IconButton edge="end" aria-label="comments">
-                              <Delete onClick={handelDelete(item._id, index)} />
-                            </IconButton>
-                          }
-                          disablePadding
+              {todos.completedTodos ? (
+                todos.completedTodos.map((item: any, index: any) => {
+                  console.log(todos.length);
+                  const labelId = `checkbox-list-label-${index}`;
+                  return (
+                    <>
+                      <ListItem
+                        key={index}
+                        secondaryAction={
+                          <IconButton edge="end" aria-label="comments">
+                            <Delete onClick={handelDelete(item._id, index)} />
+                          </IconButton>
+                        }
+                        disablePadding
+                      >
+                        <ListItemButton
+                          role={undefined}
+                          onClick={handleToggle(item, index)}
+                          dense
                         >
-                          <ListItemButton
-                            role={undefined}
-                            onClick={handleToggle(item, index)}
-                            dense
-                          >
-                            <ListItemIcon>
-                              <Checkbox
-                                edge="start"
-                                checked={item.status ? false : true}
-                                tabIndex={-1}
-                                disableRipple
-                                inputProps={{ "aria-labelledby": labelId }}
-                              />
-                            </ListItemIcon>
-                            <ListItemText
-                              id={labelId}
-                              primary={item.title}
-                              className={item.status ? "" : "toggleCompleted"}
+                          <ListItemIcon>
+                            <Checkbox
+                              edge="start"
+                              checked={item.status ? false : true}
+                              tabIndex={-1}
+                              disableRipple
+                              inputProps={{ "aria-labelledby": labelId }}
                             />
-                          </ListItemButton>
-                        </ListItem>
-                      </>
-                    );
-                  })
-                ) : (
-                  <CircularProgress />
-                )}
-              </List>
+                          </ListItemIcon>
+                          <ListItemText
+                            id={labelId}
+                            primary={item.title}
+                            className={item.status ? "" : "toggleCompleted"}
+                          />
+                        </ListItemButton>
+                      </ListItem>
+                    </>
+                  );
+                })
+              ) : (
+                <CircularProgress />
+              )}
             </List>
           </TabPanel>
           <TabPanel value="3">
             <List
-              sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
+              sx={{
+                width: "100%",
+                maxWidth: 360,
+                bgcolor: "background.paper",
+              }}
             >
-              <List
-                sx={{
-                  width: "100%",
-                  maxWidth: 360,
-                  bgcolor: "background.paper",
-                }}
-              >
-                {todos.all ? (
-                  todos.all.map((item: any, index: any) => {
-                    console.log(todos.length);
-                    const labelId = `checkbox-list-label-${index}`;
-                    return (
-                      <>
-                        <ListItem
-                          key={index}
-                          secondaryAction={
-                            <IconButton edge="end" aria-label="comments">
-                              <Delete onClick={handelDelete(item._id, index)} />
-                            </IconButton>
-                          }
-                          disablePadding
+              {todos.all ? (
+                todos.all.map((item: any, index: any) => {
+                  console.log(todos.length);
+                  const labelId = `checkbox-list-label-${index}`;
+                  return (
+                    <>
+                      <ListItem
+                        key={index}
+                        secondaryAction={
+                          <IconButton edge="end" aria-label="comments">
+                            <Delete onClick={handelDelete(item._id, index)} />
+                          </IconButton>
+                        }
+                        disablePadding
+                      >
+                        <ListItemButton
+                          role={undefined}
+                          onClick={handleToggle(item, index)}
+                          dense
                         >
-                          <ListItemButton
-                            role={undefined}
-                            onClick={handleToggle(item, index)}
-                            dense
-                          >
-                            <ListItemIcon>
-                              <Checkbox
-                                edge="start"
-                                checked={item.status ? false : true}
-                                tabIndex={-1}
-                                disableRipple
-                                inputProps={{ "aria-labelledby": labelId }}
-                              />
-                            </ListItemIcon>
-                            <ListItemText
-                              id={labelId}
-                              primary={item.title}
-                              className={item.status ? "" : "toggleCompleted"}
+                          <ListItemIcon>
+                            <Checkbox
+                              edge="start"
+                              checked={item.status ? false : true}
+                              tabIndex={-1}
+                              disableRipple
+                              inputProps={{ "aria-labelledby": labelId }}
                             />
-                          </ListItemButton>
-                        </ListItem>
-                      </>
-                    );
-                  })
-                ) : (
-                  <CircularProgress />
-                )}
-              </List>
+                          </ListItemIcon>
+                          <ListItemText
+                            id={labelId}
+                            primary={item.title}
+                            className={item.status ? "" : "toggleCompleted"}
+                          />
+                        </ListItemButton>
+                      </ListItem>
+                    </>
+                  );
+                })
+              ) : (
+                <CircularProgress />
+              )}
             </List>
           </TabPanel>
         </TabContext>

@@ -8,3 +8,15 @@
 .toggleCompleted{
  text-decoration: line-through;
 }
+.css-1blqmxq-MuiTabPanel-root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.css-13xfq8m-MuiTabPanel-root {
+    flex-direction: column;
+    align-items: center;
+    display: flex;
+    padding:0px !important;
+   
+}

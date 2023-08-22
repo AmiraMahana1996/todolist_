@@ -34,13 +34,12 @@ class Handler {
   ): Promise<void> {
     try {
       console.log(`ddd ${req.body}`);
-      const product = await TodoService.create(req.body as ITodo);
-      console.log(`${product}`);
+      const products = await TodoService.create(req.body as ITodo);
 
       res.status(200).json({
         status: 200,
         message: 'success',
-        data: product,
+        data: products,
       });
     } catch (err) {
       const error = err as Error;

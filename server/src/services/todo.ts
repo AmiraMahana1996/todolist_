@@ -12,7 +12,7 @@ class TodoService {
     }
   }
 
-  static async create(data: ITodo): Promise<ITodo> {
+  static async create(data: ITodo): Promise<ITodo[]> {
     try {
       const body = data as Pick<ITodo, 'title' | 'status'>;
 
@@ -25,7 +25,7 @@ class TodoService {
       const newTodo: ITodo = await todo.save();
       const allTodos: ITodo[] = await Todo.find();
 
-      return newTodo;
+      return allTodos;
     } catch (e) {
       throw new Error(`Cann't create product : ${e}`);
     }
@@ -42,7 +42,8 @@ class TodoService {
   static async delete(id: string): Promise<ITodo[]> {
     try {
       const deletedTodo: any = await Todo.findByIdAndDelete(id);
-      return deletedTodo;
+      const allTodos: ITodo[] = await Todo.find();
+      return allTodos;
     } catch (e) {
       throw new Error(`Cann't delete product : ${e}`);
     }

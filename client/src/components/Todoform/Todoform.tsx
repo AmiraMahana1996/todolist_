@@ -1,5 +1,5 @@
 import { Button, FormLabel, Grid } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { FormControl } from "@mui/base/FormControl";
@@ -14,6 +14,7 @@ const useStyles = makeStyles({
   },
 });
 export default function Todoform() {
+  const inputFile = useRef(null);
   const [onboardingData, setOnboardingData] = useState({});
   const classes = useStyles();
   const dispatch = useDispatch();
@@ -25,8 +26,9 @@ export default function Todoform() {
     console.log(event.target.value, onboardingData);
   };
   const handelSubmit = () => {
+    let inpt = inputFile?.current as any;
+    inpt.value = "";
     dispatch(addTodos(onboardingData as any) as any);
-    console.log(onboardingData);
   };
   return (
     <>
@@ -44,6 +46,7 @@ export default function Todoform() {
               variant="filled"
               name="title"
               onChange={onInputChange}
+              inputRef={inputFile}
             />
           </FormControl>
         </Grid>

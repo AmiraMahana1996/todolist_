@@ -3,8 +3,9 @@ import * as TYPES from "../types/todo";
 export default (state = [], action: any) => {
   switch (action.type) {
     case TYPES.GET_TODOS:
-      console.log(action.payload, "action.payload");
-      return [...state, ...action.payload];
+      return [...action.payload];
+    case TYPES.UPDATE_TODO:
+      return [...action.payload];
     default:
       return state;
   }

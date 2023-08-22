@@ -15,7 +15,11 @@ import IconButton from "@mui/material/IconButton";
 import Delete from "@mui/icons-material/Delete";
 import "./style.css";
 import { useSelector, useDispatch } from "react-redux";
-import { deleteTodos, getTodos } from "../../store/actions/actions/todo";
+import {
+  deleteTodos,
+  getTodos,
+  updateTodos,
+} from "../../store/actions/actions/todo";
 export default function TodoList() {
   const [value, setValue] = React.useState("1");
   const todos = useSelector((state: any) => state.todo);
@@ -28,9 +32,15 @@ export default function TodoList() {
     setValue(newValue);
   };
 
-  const handleToggle = (id: any, value: any) => () => {};
   const handelDelete = (id: any, value: any) => () => {
-    dispatch(deleteTodos(id as any) as any);
+    console.log(id, value);
+    // dispatch(deleteTodos(id as any) as any);
+  };
+  const handleToggle = (item: any, value: any) => () => {
+    console.log(item);
+    item["status"] = !item["status"];
+    // console.log(item);
+    dispatch(updateTodos(item._id as any, item) as any);
   };
 
   return (
@@ -49,6 +59,7 @@ export default function TodoList() {
               sx={{ width: "100%", maxWidth: 360, bgcolor: "background.paper" }}
             >
               {todos.map((item: any, index: any) => {
+                console.log(todos.length);
                 const labelId = `checkbox-list-label-${index}`;
                 return (
                   <ListItem
@@ -62,13 +73,13 @@ export default function TodoList() {
                   >
                     <ListItemButton
                       role={undefined}
-                      onClick={handleToggle(item._id, index)}
+                      onClick={handleToggle(item, index)}
                       dense
                     >
                       <ListItemIcon>
                         <Checkbox
                           edge="start"
-                          checked={item.status ? true : false}
+                          checked={item.status ? false : true}
                           tabIndex={-1}
                           disableRipple
                           inputProps={{ "aria-labelledby": labelId }}
@@ -77,7 +88,7 @@ export default function TodoList() {
                       <ListItemText
                         id={labelId}
                         primary={item.title}
-                        className={item.status ? "toggleCompleted" : ""}
+                        className={item.status ? "" : "toggleCompleted"}
                       />
                     </ListItemButton>
                   </ListItem>

@@ -18,14 +18,16 @@ export const getTodos = () => (dispatch: any) => {
       console.log(error);
     });
 };
-export const updateTodos = (id: number) => (dispatch: any) => {
+export const updateTodos = (id: string, body: any) => (dispatch: any) => {
+  console.log(body, "bodybody");
+
   axiosInstance
-    .put(`/todos/edit/${id}`)
+    .put(`/todos/update/${id}`, body)
     .then(function (response) {
       // success
       dispatch({
         type: TYPES.UPDATE_TODO,
-        payload: response.data,
+        payload: response.data.data,
       });
     })
     .catch(function (error) {

@@ -54,14 +54,14 @@ class Handler {
   ): Promise<void> {
     try {
       console.log(`${req.body}`);
-      const product = await TodoService.update(
+      const products = await TodoService.update(
         req.params.id as unknown as string,
         req.body as ITodo
       );
       res.status(200).json({
         status: 200,
         message: 'success',
-        data: product,
+        data: products,
       });
     } catch (err) {
       const error = err as Error;

@@ -30,10 +30,11 @@ class TodoService {
       throw new Error(`Cann't create product : ${e}`);
     }
   }
-  static async update(id: string, todo: ITodo): Promise<ITodo> {
+  static async update(id: string, todo: ITodo): Promise<ITodo[]> {
     try {
       const updatedTodo: any = await Todo.findByIdAndUpdate(id, todo);
-      return updatedTodo;
+      const allTodos: ITodo[] = await Todo.find();
+      return allTodos;
     } catch (e) {
       throw new Error(`Cann't update product : ${e}`);
     }
